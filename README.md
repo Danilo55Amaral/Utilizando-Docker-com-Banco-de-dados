@@ -2,7 +2,7 @@
 
 O Docker é uma forma de virtualização que utiliza imagens mantendo aplicações de forma 
 isolada, o Docker permite o envio, execução e o desenvolvimento de aplicaçãos, 
-utilizando o Docker é possivel gerenciar infraestrutura da mesma forma que se gerencia 
+utilizando o Docker é possível gerenciar infraestrutura da mesma forma que se gerencia 
 aplicações. 
 
 É possível empacotar e executar um banco de dados ou servidor por exemplo, em um 
@@ -15,3 +15,89 @@ forma isolada isso trás mais segurança, a utilização de contêineres Docker 
 também uma melhor otimização de recursos de hardware da propria máquina.
 
 
+## Criando Imagem do MySQL no Docker
+
+Caso não possua o Docker instalado em sua máquina você pode acessar o site oficial 
+do Docker e seguir os passos para a instalação. 
+```bash
+    https://www.docker.com
+```
+Após a instalação do Docker podemos utilizar comandos via terminal para criação e 
+gerênciamento dos contêineres, a seguir vou utilizar alguns desses comandos para criar 
+um contêiner com uma imagem do MySQL.
+
+Abra o Windows PowerShell e nele executamos os comandos necessários para a criação do 
+Contêiner com o MySQL.
+
+Verificando se o Docker está instalado:
+```bash
+    docker -v
+```
+Caso esteja ele irá retornar a versão do Docker que foi instalada.
+
+![docker-post03.PNG](https://github.com/Danilo55Amaral/Utilizando-Docker-com-Banco-de-dados/blob/main/docker-post03.PNG)
+
+## DockerHub 
+O dockerHub é um repositório de imagens do Docker e pode ser acessado através do link
+a seguir:
+```bash
+    https://hub.docker.com
+```
+Imagens no Docker são scripts que são preconfigurados para executar coisas como banco 
+de dados, servidores e outras aplicações, para executar esses serviços usamos imagens no Docker, através do Dockerhub é possivel baixar imagens como a do MySQL para rodar 
+diretamente no Docker.
+
+O comando a seguir vai puxar a imagem do MySQL para o Docker:
+```bash
+    docker pull mysql
+```
+Esse comando vai buscar a versão mais recente do MySQL e instalar tudo que for 
+necessário para rodar dentro do Docker. 
+
+![docker02.PNG](https://github.com/Danilo55Amaral/Utilizando-Docker-com-Banco-de-dados/blob/main/docker02.PNG)
+
+Após baixar a imagem é possivel criar um contêiner que vai rodar a imagem do MySQL,
+para criar o contêiner basta rodar o seguinte comando:
+```bash
+    docker run -p 3306:3306 --name mysql_potencia_tech -e MYSQL_ROOT_PASSWORD=root -d mysql
+```
+
+O -p vai ser para indicar a porta em que o Mysql vai rodar, --name serve para colocar 
+o nome do banco de dados, -e serve para passar a senha para o root, -d é utilizado 
+para indicar qual a imagem que será utilizada no contêiner. 
+
+Para verificar quais contêineres estão rodando é utilizado o seguinte comando:
+```bash
+    docker ps
+```
+
+Também é possivel de utilizar em ambiente Windows a interface gráfica do Docker e 
+verificar, manipular esses contêineres. 
+
+![docker-post01.PNG](https://github.com/Danilo55Amaral/Utilizando-Docker-com-Banco-de-dados/blob/main/docker-post01.PNG)
+
+Na opção actions do contêiner é possível abrir o terminal de execução dentro do Docker 
+e assim poder acessar e manipular o banco de dados diretamente via terminal no Docker, para
+acessar o Shell do contêiner e testar o MySQL rode o seguinte comando:
+```bash
+    mysql -uroot -p 
+```
+Após fazer isso ele irá pedir a senha do root para poder acessar o banco de dados.
+Após efetuar a conexão pode utilizar o comando seguinte para testar e listar os bancos.
+```bash
+    SHOW DATABASES;
+```
+
+![docker-post02.PNG](https://github.com/Danilo55Amaral/Utilizando-Docker-com-Banco-de-dados/blob/main/docker-post02.PNG)
+
+## Conectando o contêiner ao MySQL Workbench
+
+É necessário instalar o MySQL Workbench na máquina porém não é necessário instalar 
+o MySQL pois vamos utilizar o MySQL que está rodando dentro do contêiner do Docker.
+
+Após instalar o MySQL Workbench basta criar uma conexão utilizando o método de conexão 
+padrão (TCP/IP), em seguida passar o Hostname e a porta que o nosso Contêiner Mysql 
+está rodando, a senha passada para a conexão é a mesma senha que passamos quando 
+criamos o contêiner com a imagem do MySQL.
+
+![workebenc-post01.PNG](https://github.com/Danilo55Amaral/Utilizando-Docker-com-Banco-de-dados/blob/main/workebenc-post01.PNG)

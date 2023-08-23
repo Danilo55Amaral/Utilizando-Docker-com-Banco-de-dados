@@ -1,4 +1,7 @@
-# Rodando Banco de Dados com Docker
+<h1>
+     <img align="center" width="40px" src="https://1000logos.net/wp-content/uploads/2021/11/Docker-Logo.png">
+    <span> Rodando Banco de Dados com Docker</span>
+</h1>
 
 O Docker é uma forma de virtualização que utiliza imagens mantendo aplicações de forma 
 isolada, o Docker permite o envio, execução e o desenvolvimento de aplicaçãos, 
@@ -101,3 +104,45 @@ está rodando, a senha passada para a conexão é a mesma senha que passamos qua
 criamos o contêiner com a imagem do MySQL.
 
 ![workebenc-post01.PNG](https://github.com/Danilo55Amaral/Utilizando-Docker-com-Banco-de-dados/blob/main/workebenc-post01.PNG)
+
+## Criando Imagem do PostgreSQL no Docker
+
+Aqui eu utilizo uma imagem do bitnami/postgresql mas fica a critério, também 
+pode ser utilizada a 
+imagem oficial do PostgresSQL, basta ir ao DockerHub e seguir os passos de 
+criação da imagem oficial do PostgresSQL.
+
+Para criar o contêiner utilizando a imagem do bitnami/postgresql rodamos o seguinte comando.
+```bash
+    docker run --name api-solid-pg -e POSTGRESQL_USERNAME=root -e POSTGRESQL_PASSWORD=root -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql
+```
+Após fazer isso ele vai subir o banco de dados PostgresSQL criado ao contêiner 
+do Docker.
+
+Note que ao abrir a interface do Docker eu posso ver os dois Contêineres com os 
+dois bancos de dados.
+
+![docker-post01.PNG](https://github.com/Danilo55Amaral/Utilizando-Docker-com-Banco-de-dados/blob/main/docker-post01.PNG)
+
+## Alguns comandos do Docker 
+
+Para rodar o contêiner via terminal basta rodar o comando start passando o id ou o nome do contêiner:
+```bash
+    docker start nome-do-conteiner
+```
+Para parar de rodar o contêiner basta rodar o comando stop:
+```bash
+    docker stop nome-do-conteiner
+```
+Para deletar um contêiner basta rodar o comando rm:
+```bash
+    docker rm nome-do-conteiner
+```
+Para ver logs do contêiner:
+```bash
+    docker logs nome-do-conteiner
+```
+Para ficar monitorando os logs basta utilizar o -f:
+```bash
+    docker logs nome-do-conteiner -f
+```
